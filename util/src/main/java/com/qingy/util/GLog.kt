@@ -35,36 +35,36 @@ object GLog {
      */
     var SHOW_LOG = true
 
-    fun d(tag: String?, msg: String?): Int {
-        return println(Log.DEBUG, tag, null, msg)
+    fun d(tag: String?, vararg msg: String?): Int {
+        return println(Log.DEBUG, tag, null, *msg)
     }
 
-    fun d(tag: String?, msg: String, tr: Throwable?): Int {
-        return println(Log.DEBUG, tag, tr, msg)
+    fun d(tag: String?, vararg msg: String, tr: Throwable?): Int {
+        return println(Log.DEBUG, tag, tr, *msg)
     }
 
-    fun i(tag: String?, msg: String?): Int {
-        return println(Log.INFO, tag, null, msg)
+    fun i(tag: String?, vararg msg: String?): Int {
+        return println(Log.INFO, tag, null, *msg)
     }
 
-    fun i(tag: String?, msg: String, tr: Throwable?): Int {
-        return println(Log.INFO, tag, tr, msg)
+    fun i(tag: String?, vararg msg: String, tr: Throwable?): Int {
+        return println(Log.INFO, tag, tr, *msg)
     }
 
-    fun w(tag: String?, msg: String?): Int {
-        return println(Log.WARN, tag, null, msg)
+    fun w(tag: String?, vararg msg: String?): Int {
+        return println(Log.WARN, tag, null, *msg)
     }
 
-    fun w(tag: String?, msg: String, tr: Throwable?): Int {
-        return println(Log.WARN, tag, tr, msg)
+    fun w(tag: String?, vararg msg: String, tr: Throwable?): Int {
+        return println(Log.WARN, tag, tr, *msg)
     }
 
-    fun e(tag: String?, msg: String?): Int {
-        return println(Log.ERROR, tag, null, msg)
+    fun e(tag: String?, vararg msg: String?): Int {
+        return println(Log.ERROR, tag, null, *msg)
     }
 
-    fun e(tag: String?, msg: String, tr: Throwable?): Int {
-        return println(Log.ERROR, tag, tr, msg)
+    fun e(tag: String?, vararg msg: String, tr: Throwable?): Int {
+        return println(Log.ERROR, tag, tr, *msg)
     }
 
     private const val PARAM = "Param"
@@ -125,6 +125,9 @@ object GLog {
         } else {
             NULL
         }
+
+        //msg = objects.contentToString()
+
         tr?.let {
             msg += Log.getStackTraceString(it)
         }
