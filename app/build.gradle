@@ -1,0 +1,62 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    compileSdk rootProject.ext.compileSdk
+
+    defaultConfig {
+        applicationId "com.qingy.developin"
+        minSdk rootProject.ext.minSdk
+        targetSdk rootProject.ext.targetSdk
+        versionCode 100
+        versionName "1.0.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+//    ndkVersion '21.4.7075529'
+//    externalNativeBuild {
+//        cmake {
+//            path file('src/main/cpp/CMakeLists.txt')
+//            version '3.18.1'
+//        }
+//    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+}
+
+dependencies {
+    implementation rootProject.ext.deps["appcompat"]
+    implementation rootProject.ext.deps["material"]
+    implementation rootProject.ext.deps["constraintlayout"]
+    implementation rootProject.ext.deps["constraintlayout"]
+    implementation rootProject.ext.deps["navigation-ui-ktx"]
+    implementation rootProject.ext.deps["navigation-fragment-ktx"]
+
+    implementation project(":util")
+
+    testImplementation rootProject.ext.deps["junt"]
+    androidTestImplementation rootProject.ext.deps["ajunt"]
+    androidTestImplementation rootProject.ext.deps["espresso"]
+}
