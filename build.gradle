@@ -15,6 +15,7 @@ buildscript {
                 "constraintlayout"       : "androidx.constraintlayout:constraintlayout:2.1.4",
                 "navigation-fragment-ktx": "androidx.navigation:navigation-fragment-ktx:2.5.2",
                 "navigation-ui-ktx"      : "androidx.navigation:navigation-ui-ktx:2.5.2",
+                "util"                   : "com.blankj:utilcodex:1.31.1",
         ]
     }
 }
