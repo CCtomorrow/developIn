@@ -3,7 +3,7 @@
 buildscript {
     ext {
         compileSdk = 32
-        minSdk = 21
+        minSdk = 23
         targetSdk = 32
 
         deps = [
@@ -16,6 +16,7 @@ buildscript {
                 "navigation-fragment-ktx": "androidx.navigation:navigation-fragment-ktx:2.5.2",
                 "navigation-ui-ktx"      : "androidx.navigation:navigation-ui-ktx:2.5.2",
                 "util"                   : "com.blankj:utilcodex:1.31.1",
+                "permissions"            : "com.github.getActivity:XXPermissions:18.0",
         ]
     }
 }

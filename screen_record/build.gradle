@@ -1,28 +1,21 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
 }
 
 android {
+    namespace 'com.qingy.screen_record'
     compileSdk rootProject.ext.compileSdk
 
     defaultConfig {
-        applicationId "com.qingy.developin"
         minSdk rootProject.ext.minSdk
         targetSdk rootProject.ext.targetSdk
         versionCode 100
         versionName "1.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
     }
-
-//    ndkVersion '21.4.7075529'
-//    externalNativeBuild {
-//        cmake {
-//            path file('src/main/cpp/CMakeLists.txt')
-//            version '3.18.1'
-//        }
-//    }
 
     buildTypes {
         release {
@@ -40,23 +33,13 @@ android {
         jvmTarget = '1.8'
     }
 
-    buildFeatures {
-        viewBinding true
-    }
-
 }
 
 dependencies {
-    implementation rootProject.ext.deps["util"]
-    implementation rootProject.ext.deps["appcompat"]
-    implementation rootProject.ext.deps["material"]
-    implementation rootProject.ext.deps["constraintlayout"]
-    implementation rootProject.ext.deps["constraintlayout"]
-    implementation rootProject.ext.deps["navigation-ui-ktx"]
-    implementation rootProject.ext.deps["navigation-fragment-ktx"]
+    api rootProject.ext.deps["appcompat"]
+    api rootProject.ext.deps["permissions"]
 
     implementation project(":util")
-    implementation project(":screen_record")
 
     testImplementation rootProject.ext.deps["junt"]
     androidTestImplementation rootProject.ext.deps["ajunt"]
