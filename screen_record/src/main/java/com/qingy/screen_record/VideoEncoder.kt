@@ -32,6 +32,7 @@ class VideoEncoder(private val path: String, private val rect: Rect) {
 
     public class EncoderCallback : MediaCodec.Callback() {
         override fun onInputBufferAvailable(codec: MediaCodec, index: Int) {
+            val inputBuffer = codec.getInputBuffer(index)
         }
 
         override fun onOutputBufferAvailable(

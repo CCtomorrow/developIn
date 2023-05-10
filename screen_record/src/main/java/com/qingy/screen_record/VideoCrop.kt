@@ -1,6 +1,7 @@
 package com.qingy.screen_record
 
 import android.graphics.Rect
+import android.hardware.display.VirtualDisplay
 import android.media.MediaCodec.CONFIGURE_FLAG_ENCODE
 import android.os.Handler
 import android.os.HandlerThread
@@ -14,7 +15,7 @@ import android.os.HandlerThread
  * <b>Description:</b>  <br>
  */
 class VideoCrop(
-    private val recordService: RecordService,
+    private val virtualDisplay: VirtualDisplay?,
     private val path: String,
     private val rect: Rect
 ) {
@@ -33,11 +34,10 @@ class VideoCrop(
         mediaCodec?.setCallback(videoEncoder.encoderCallback, Handler(encoderThread.looper))
         mediaCodec?.configure(videoEncoder.mediaFormat, null, null, CONFIGURE_FLAG_ENCODE)
         videoEncoder.surface = mediaCodec?.createInputSurface()
-
+        virtualDisplay?.surface = videoEncoder.surface
         handler.post {
 
         }
-
     }
 
 }

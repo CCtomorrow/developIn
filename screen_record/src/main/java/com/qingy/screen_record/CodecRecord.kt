@@ -1,6 +1,7 @@
 package com.qingy.screen_record
 
-import android.hardware.display.DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR
+import android.graphics.Rect
+import android.hardware.display.DisplayManager.VIRTUAL_DISPLAY_FLAG_PUBLIC
 import android.media.projection.MediaProjection
 import android.util.DisplayMetrics
 import com.qingy.util.KLog
@@ -34,11 +35,11 @@ class CodecRecord : BaseRecord() {
         KLog.d(TAG, "width:${displayMetrics.widthPixels} height:${displayMetrics.heightPixels}")
         virtualDisplay = mediaProjection?.createVirtualDisplay(
             "MainScreen", width, height, displayMetrics.densityDpi,
-            VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR, null, null, null
+            VIRTUAL_DISPLAY_FLAG_PUBLIC, null, null, null
         )
         //virtualDisplay?.surface = xxx //后续再设置
         //开始录制
-        //val videoCrop = VideoCrop(this, saveFile!!.absolutePath, Rect(0, 0, width, height))
+        VideoCrop(virtualDisplay, savePath, Rect(0, 0, width, height))
     }
 
     fun stopRecord() {
