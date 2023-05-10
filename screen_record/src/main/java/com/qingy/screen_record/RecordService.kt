@@ -5,6 +5,7 @@ import android.app.PendingIntent.FLAG_IMMUTABLE
 import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
+import android.hardware.display.VirtualDisplay
 import android.media.projection.MediaProjection
 import android.media.projection.MediaProjectionManager
 import android.os.Build.VERSION
@@ -48,9 +49,9 @@ class RecordService : Service() {
         setUpAsForeground()
     }
 
-//    fun getVirtualDisplay(): VirtualDisplay? {
-//        return virtualDisplay
-//    }
+    fun getVirtualDisplay(): VirtualDisplay? {
+        return normalRecord?.virtualDisplay
+    }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         val onStartCommand = super.onStartCommand(intent, flags, startId)
@@ -101,35 +102,6 @@ class RecordService : Service() {
      */
     fun stopRecord() {
         normalRecord?.stopRecord()
-    }
-
-    private fun initRecordAd() {
-        KLog.d(TAG, "initRecorder")
-        var result = true
-        val f = File(savePath)
-        if (!f.exists()) {
-            f.mkdirs()
-        }
-        saveFile = File(savePath, "$saveName.tmp")
-        saveFile?.apply {
-            if (exists()) {
-                delete()
-            }
-        }
-        val width = displayMetrics.widthPixels
-        val height = displayMetrics.heightPixels
-        KLog.d(TAG, "width:${width} height:${height}")
-
-//        virtualDisplay = mediaProjection?.createVirtualDisplay(
-//            "MainScreen", width, height, displayMetrics.densityDpi,
-//            DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR, null, null, null
-//        )
-
-        //virtualDisplay?.surface = xxx //后续再设置
-
-        //开始录制
-        //val videoCrop = VideoCrop(this, saveFile!!.absolutePath, Rect(0, 0, width, height))
-
     }
 
     private fun resume() {

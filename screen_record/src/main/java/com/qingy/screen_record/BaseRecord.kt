@@ -26,7 +26,7 @@ abstract class BaseRecord {
     protected lateinit var displayMetrics: DisplayMetrics
     protected lateinit var savePath: String
 
-    protected var virtualDisplay: VirtualDisplay? = null
+    var virtualDisplay: VirtualDisplay? = null
 
     protected var isRecording = false
     protected var recordAudio = false
