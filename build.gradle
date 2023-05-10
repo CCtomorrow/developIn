@@ -17,6 +17,7 @@ buildscript {
                 "navigation-ui-ktx"      : "androidx.navigation:navigation-ui-ktx:2.5.2",
                 "util"                   : "com.blankj:utilcodex:1.31.1",
                 "permissions"            : "com.github.getActivity:XXPermissions:18.0",
+                "window"                 : "com.github.getActivity:EasyWindow:10.0",
         ]
     }
 }

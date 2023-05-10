@@ -13,7 +13,11 @@ import android.os.HandlerThread
  * <b>Address:</b> qingyong@grgbanking.com <br>
  * <b>Description:</b>  <br>
  */
-class VideoCrop(private val path: String, private val rect: Rect) {
+class VideoCrop(
+    private val recordService: RecordService,
+    private val path: String,
+    private val rect: Rect
+) {
 
     private val handlerThread = HandlerThread("VideoCrop")
     private val handler by lazy { Handler(handlerThread.looper) }

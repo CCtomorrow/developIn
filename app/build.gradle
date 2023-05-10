@@ -55,6 +55,8 @@ dependencies {
     implementation rootProject.ext.deps["navigation-ui-ktx"]
     implementation rootProject.ext.deps["navigation-fragment-ktx"]
 
+    implementation rootProject.ext.deps["window"]
+
     implementation project(":util")
     implementation project(":screen_record")
 
