@@ -1,17 +1,12 @@
 package com.qingy.screen_record
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.content.res.AssetFileDescriptor
 import android.hardware.display.DisplayManager
-import android.hardware.display.VirtualDisplay
 import android.media.*
 import android.media.projection.MediaProjection
-import android.net.Uri
 import android.os.Build
 import android.util.DisplayMetrics
-import android.widget.Toast
-import com.qingy.util.GlobalUtils
 import com.qingy.util.KLog
 import java.io.File
 import java.nio.ByteBuffer
@@ -24,27 +19,10 @@ import java.nio.ByteBuffer
  * <b>Address:</b> qingyong@grgbanking.com <br>
  * <b>Description:</b>  <br>
  */
-class NormalRecord {
+class NormalRecord : BaseRecord() {
     private val TAG = "NormalRecord"
     private val VIDEO_FRAME_RATE = 30
     private var mediaRecorder: MediaRecorder? = null
-
-    private var mediaProjection: MediaProjection? = null
-    private lateinit var displayMetrics: DisplayMetrics
-    private lateinit var savePath: String
-
-    private var virtualDisplay: VirtualDisplay? = null
-
-    private var isRecording = false
-    private var recordAudio = false
-
-    private fun showToast(str: String) {
-        Toast.makeText(
-            GlobalUtils.getApp(),
-            str,
-            Toast.LENGTH_SHORT
-        ).show()
-    }
 
     fun startRecord(
         displayMetrics: DisplayMetrics,
@@ -272,19 +250,4 @@ class NormalRecord {
         mediaProjection?.stop()
         mediaProjection = null
     }
-
-    private fun refreshVideo(newFile: File) {
-        KLog.d(TAG, "screen record end,file length:${newFile.length()}.")
-        if (newFile.length() > 5000) {
-            val intent = Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE)
-            intent.data = Uri.fromFile(newFile)
-            GlobalUtils.getApp().sendBroadcast(intent)
-            showToast("保存成功")
-        } else {
-            newFile.delete()
-            showToast("当前手机暂不支持录屏")
-            KLog.e(TAG, "录制失败")
-        }
-    }
-
 }
