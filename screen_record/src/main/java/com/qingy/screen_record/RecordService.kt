@@ -16,6 +16,8 @@ import android.os.IBinder
 import android.os.Looper
 import com.qingy.util.KLog
 import java.io.File
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  *
@@ -32,25 +34,27 @@ class RecordService : Service() {
     }
     private var mediaProjection: MediaProjection? = null
 
-    private var normalRecord: NormalRecord? = null
+    private var recorder: CodecRecord? = null
 
     private val displayMetrics by lazy { resources.displayMetrics }
     private val handler by lazy { Handler(Looper.getMainLooper()) }
 
     private var saveFile: File? = null
 
+    private val dataFormat by lazy { SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()) }
+    private val date by lazy { Date() }
+
     private var savePath: String = Environment.getExternalStorageDirectory().absolutePath +
             File.separator + "DCIM" + File.separator + "Camera"
-    private val saveName: String = "sr_${System.currentTimeMillis()}"
 
     override fun onCreate() {
         super.onCreate()
-        normalRecord = NormalRecord()
+        recorder = CodecRecord()
         setUpAsForeground()
     }
 
     fun getVirtualDisplay(): VirtualDisplay? {
-        return normalRecord?.virtualDisplay
+        return recorder?.virtualDisplay
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -86,6 +90,8 @@ class RecordService : Service() {
         if (!f.exists()) {
             f.mkdirs()
         }
+        date.time = System.currentTimeMillis()
+        val saveName = "sr_${dataFormat.format(date)}"
         saveFile = File(savePath, "$saveName.tmp")
         saveFile?.apply {
             if (exists()) {
@@ -93,7 +99,7 @@ class RecordService : Service() {
             }
         }
         mediaProjection?.let {
-            normalRecord?.startRecord(displayMetrics, it, saveFile!!.absolutePath)
+            recorder?.startRecord(displayMetrics, it, saveFile!!.absolutePath)
         }
     }
 
@@ -101,15 +107,15 @@ class RecordService : Service() {
      * if you has parameters, the recordAudio will be invalid
      */
     fun stopRecord() {
-        normalRecord?.stopRecord()
+        recorder?.stopRecord()
     }
 
     private fun resume() {
-        normalRecord?.resume()
+        recorder?.resume()
     }
 
     private fun pause() {
-        normalRecord?.pause()
+        recorder?.pause()
     }
 
     private fun setUpAsForeground() {

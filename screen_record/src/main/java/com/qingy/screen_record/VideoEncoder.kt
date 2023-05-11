@@ -11,6 +11,7 @@ import android.media.MediaMuxer
 import android.media.MediaMuxer.OutputFormat.MUXER_OUTPUT_MPEG_4
 import android.os.HandlerThread
 import android.view.Surface
+import com.qingy.util.KLog
 
 /**
  *
@@ -21,6 +22,10 @@ import android.view.Surface
  * <b>Description:</b>  <br>
  */
 class VideoEncoder(private val path: String, private val rect: Rect) {
+
+    companion object {
+        private val TAG = "VideoEncoder"
+    }
 
     var mediaFormat: MediaFormat? = null
     var mediaCodec: MediaCodec? = null
@@ -33,6 +38,7 @@ class VideoEncoder(private val path: String, private val rect: Rect) {
     public class EncoderCallback : MediaCodec.Callback() {
         override fun onInputBufferAvailable(codec: MediaCodec, index: Int) {
             val inputBuffer = codec.getInputBuffer(index)
+            KLog.d(TAG, "onInputBufferAvailable")
         }
 
         override fun onOutputBufferAvailable(
@@ -40,12 +46,15 @@ class VideoEncoder(private val path: String, private val rect: Rect) {
             index: Int,
             info: MediaCodec.BufferInfo
         ) {
+            KLog.d(TAG, "onOutputBufferAvailable")
         }
 
         override fun onError(codec: MediaCodec, e: MediaCodec.CodecException) {
+            KLog.d(TAG, "onError")
         }
 
         override fun onOutputFormatChanged(codec: MediaCodec, format: MediaFormat) {
+            KLog.d(TAG, "onOutputFormatChanged")
         }
 
     }

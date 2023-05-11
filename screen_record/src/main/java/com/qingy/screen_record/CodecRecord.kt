@@ -17,6 +17,8 @@ import com.qingy.util.KLog
 class CodecRecord : BaseRecord() {
     private val TAG = "CodecRecord"
 
+    private var videoCrop: VideoCrop? = null
+
     fun startRecord(
         displayMetrics: DisplayMetrics,
         mediaProjection: MediaProjection,
@@ -39,11 +41,11 @@ class CodecRecord : BaseRecord() {
         )
         //virtualDisplay?.surface = xxx //后续再设置
         //开始录制
-        VideoCrop(virtualDisplay, savePath, Rect(0, 0, width, height))
+        videoCrop = VideoCrop(virtualDisplay, savePath, Rect(0, 0, width, height))
     }
 
     fun stopRecord() {
-
+        videoCrop?.stop()
     }
 
     fun resume() {
