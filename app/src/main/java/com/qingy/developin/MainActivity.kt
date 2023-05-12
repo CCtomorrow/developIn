@@ -8,6 +8,7 @@ import com.hjq.permissions.OnPermissionCallback
 import com.hjq.permissions.Permission
 import com.hjq.permissions.XXPermissions
 import com.qingy.developin.databinding.ActivityMainBinding
+import com.qingy.screen_record.CameraToMpegTest
 import com.qingy.screen_record.ScreenRecordHelper
 
 class MainActivity : AppCompatActivity() {
@@ -39,6 +40,7 @@ class MainActivity : AppCompatActivity() {
         }
         binding.record.setOnClickListener { recordScreen() }
         binding.recordStop.setOnClickListener { recordStop() }
+        binding.cameraToMp4.setOnClickListener { CameraToMpegTest().apply { testEncodeCameraToMp4() } }
     }
 
     override fun onResume() {
@@ -50,7 +52,8 @@ class MainActivity : AppCompatActivity() {
         val list = XXPermissions.getDenied(
             getActivity(),
             Permission.RECORD_AUDIO,
-            Permission.MANAGE_EXTERNAL_STORAGE
+            Permission.MANAGE_EXTERNAL_STORAGE,
+            Permission.CAMERA
         )
         return list
     }

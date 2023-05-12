@@ -66,7 +66,7 @@ import java.nio.FloatBuffer;
  */
 public class CameraToMpegTest {
     private static final String TAG = "CameraToMpegTest";
-    private static final boolean VERBOSE = false;           // lots of logging
+    private static final boolean VERBOSE = true;           // lots of logging
 
     // where to put the output file (note: /sdcard requires WRITE_EXTERNAL_STORAGE permission)
     private static final File OUTPUT_DIR = Environment.getExternalStorageDirectory();
@@ -426,6 +426,7 @@ public class CameraToMpegTest {
         ByteBuffer[] encoderOutputBuffers = mEncoder.getOutputBuffers();
         while (true) {
             int encoderStatus = mEncoder.dequeueOutputBuffer(mBufferInfo, TIMEOUT_USEC);
+            if (VERBOSE) Log.d(TAG, "encoderStatus:" + encoderStatus);
             if (encoderStatus == MediaCodec.INFO_TRY_AGAIN_LATER) {
                 // no output available yet
                 if (!endOfStream) {
@@ -955,4 +956,5 @@ public class CameraToMpegTest {
             }
         }
     }
+
 }

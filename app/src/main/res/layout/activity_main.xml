@@ -30,4 +30,11 @@
         android:layout_height="wrap_content"
         android:text="停止屏幕录制" />
 
+    <Button
+        android:id="@+id/camera_to_mp4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="camera_to_mp4"
+        android:textAllCaps="false" />
+
 </LinearLayout>
